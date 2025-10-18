@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Local Weather & Holidays</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Local Weather & Holiday Dashboard</h1>
+        <p id="tz">Detecting timezone…</p>
+      </div>
+      <div style="text-align:right">
+        <div id="status" style="color:var(--muted);font-size:13px">Status: ready</div>
+      </div>
+    </header>
+
+    <section class="card time-card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div class="time-large" id="local-time">--:--:--</div>
+          <div class="time-small" id="local-date">Loading date…</div>
+        </div>
+        <div style="text-align:right;color:var(--muted)">
+          <div>Local Time</div>
+          <div id="locale" style="font-size:13px;margin-top:6px"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card weather-card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-weight:700">Current Weather</div>
+          <div class="weather-row" style="margin-top:10px">
+            <div class="weather-icon" id="weather-icon">☀️</div>
+            <div class="weather-info">
+              <div class="temp" id="temperature">-- °C</div>
+              <div class="meta" id="weather-desc">Fetching…</div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:right">
+          <div class="meta">Location</div>
+          <div id="loc-name" style="font-weight:600;margin-top:6px">Detecting…</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card countdown-card">
+      <div>
+        <div style="font-weight:700">Countdown to Weekend</div>
+        <div style="color:var(--muted);font-size:13px">
+          Time remaining until the start of the weekend (Saturday 00:00 local)
+        </div>
+        <div class="countdown" style="margin-top:12px">
+          <div class="digits">
+            <div class="digit"><div id="cd-days">--</div><small>Days</small></div>
+            <div class="digit"><div id="cd-hours">--</div><small>Hours</small></div>
+            <div class="digit"><div id="cd-mins">--</div><small>Minutes</small></div>
+            <div class="digit"><div id="cd-secs">--</div><small>Seconds</small></div>
+          </div>
+          <div id="cd-message" style="color:var(--muted);font-size:13px"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card holidays">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div style="font-weight:700">Namibian Public Holidays</div>
+        <div style="color:var(--muted);font-size:13px">
+        </div>
+      </div>
+      <div class="holidays-list" id="holidays-list"></div>
+
+  
+  <table id="holidayTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data is added here by the script.js -->
+    </tbody>
+  </table>
+  
+    </section>
+
+    <footer>
+      Built with Open-Meteo API (no API key required) and browser geolocation.
+    </footer>
+  </div>
+
+  
+  <!-- Embedded holidays JSON -->
+   <!--
+  <script id="nam-holidays" type="application/json">
+  [
+    {"date":"2026-01-01","name":"New Year's Day"},
+    {"date":"2025-03-21","name":"Independence Day"},
+    {"date":"2025-04-18","name":"Good Friday"},
+    {"date":"2025-04-21","name":"Easter Monday"},
+    {"date":"2025-05-01","name":"Workers' Day"},
+    {"date":"2025-08-26","name":"Heroes' Day"},
+    {"date":"2025-09-10","name":"Cassinga Day"},
+    {"date":"2025-12-10","name":"Human Rights Day"},
+    {"date":"2025-12-25","name":"Christmas Day"},
+    {"date":"2025-12-26","name":"Family Day"}
+  ]
+  </script>
+-->
+ 
+
+
+  <script src="script.js"></script>
+</body>
+</html>

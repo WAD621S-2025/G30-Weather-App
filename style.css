@@ -1,0 +1,201 @@
+/* --- Base Styles --- */
+:root {
+  --primary:rgba(0, 0, 255, 0.445);
+  --secondary: #0096c7;
+  --accent: #48cae4;
+  --light: #f8f9fa;
+  --dark: #1b263b;
+  --muted:#9aa4b2;
+  --black:#000000;
+  --bg:#0f1724; 
+  --gap:16px; 
+  --radius: 10px;
+  --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", Arial, sans-serif;
+  background: url('Sunset.webp') no-repeat center center fixed;
+  background-size: cover;
+  color: var(--muted);
+}
+
+.wrap{
+    max-width:1100px;
+    margin:36px auto;
+    padding:24px;
+    display:grid;
+    grid-template-columns:repeat(12,1fr);
+    gap:var(--gap);
+   
+
+}
+
+/* --- Header --- */
+header{
+    grid-column:1/-1;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px
+}
+header h1{
+    font-size:20px;
+    margin:0
+}
+header p{
+    margin:0;
+    color:var(--muted)
+}
+
+/* --- Card Layout --- */
+.card {
+  background:var(--bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: var(--transition);
+  
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+  margin-top: 0;
+  color: var(--light);
+  font-size: 1.2rem;
+}
+.time-card{
+    grid-column:1/5
+}
+.weather-card{
+    grid-column:5/9
+}
+.countdown-card{
+    grid-column:9/13
+}
+.holidays{
+    grid-column:1/-1
+}
+/* --- Time Section --- */
+.time-large {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--muted);
+ 
+}
+
+.time-small {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* --- Weather Section --- */
+.weather-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#temperature {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+#weather-desc {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* --- Countdown Section --- */
+.countdown-card {
+  text-align: center;
+}
+
+#countdown {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--light);
+  margin-top: 10px;
+  text-align:start;
+}
+
+#cd-message {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: var(--light);
+}
+
+/* --- Holidays Dropdown --- */
+details summary {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--light);
+  cursor: pointer;
+  list-style:table;
+}
+
+details summary::marker {
+  display: none;
+}
+
+details[open] summary {
+  color: var(--light);
+}
+
+details {
+  border: 1px solid #e0e0e0;
+  border-radius: var(--radius);
+  padding: 10px 15px;
+  background: #fefefe;
+  transition: var(--transition);
+}
+
+details:hover {
+  background: #f8faff;
+}
+
+.holidays-list {
+  margin-top: 12px;
+  padding-left: 10px;
+}
+
+.holidays-list .holiday {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.holidays-list .holiday:last-child {
+  border-bottom: none;
+}
+
+.holidays-list .holiday .when {
+  font-size: 0.9rem;
+  color: var(--light);
+}
+
+.holidays-list .badge {
+  background: var(--accent);
+  color: white;
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+/* --- Footer --- */
+footer{
+    grid-column:1/-1;
+    color:var(--black);
+    font-size:13px;
+    margin-top:6px
+}
