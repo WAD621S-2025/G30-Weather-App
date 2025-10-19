@@ -43,42 +43,19 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  
+}
+
+.container-table{
   justify-content:space-around;
+  align-items: center;
+  
+  
 }
-
-/*
-.wraps{
-    max-width:700px;
-    min-width: 320px;
-    margin:36px auto;
-    padding:24px;
-    display:grid;
-    grid-template-columns:repeat(12,1fr);
-    gap:var(--gap);
-   
-
-}
-*/
-/*
-.wrap{
-    max-width:1100px;
-    min-width: 320px;
-    margin:36px auto;
-    padding:24px;
-    display:flex;
-    flex-direction: column;
-    grid-template-columns:repeat(12,1fr);
-    gap:var(--gap);
-   
-
-}*/
 
 /* --- Header --- */
 header{
-    /*grid-column:1/-1;*/
     display:flex;
-    /*align-items:center;
-    justify-content:space-between;*/
     gap:20px;
     margin: 20px;
     text-align: center;
@@ -154,7 +131,7 @@ div.small {
 }
 .holidays{
     min-width: 320px;
-    max-width: 1050px;
+    max-width: 2000px;
     gap: 20px;
     text-align: center;
     font-weight: bold;
@@ -166,27 +143,6 @@ div.small {
 .holidays-layout{
   font-weight: bold;
 }
-
-/*
-.card h2 {
-  margin-top: 0;
-  color: var(--light);
-  font-size: 1.2rem;
-}
-
-.time-card{
-    grid-column:1/5
-}
-.weather-card{
-    grid-column:5/9
-}
-.countdown-card{
-    grid-column:9/13
-}
-.holidays{
-    grid-column:1/-1
-}
-*/
 
 /* --- Time Section --- */
 .time-large {
@@ -209,26 +165,19 @@ div.small {
 }
 
 /* --- Weather Section --- */
-/*
-.weather-card {
-  display: flex;
-  flex-direction: column;
-  align-items:center;
-}*/
-
 .weather-icon{
   font-size: 55px;
 }
 
 #temperature {
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 35px;
+  font-weight: bold;
   color: var(--muted);
 }
 
 #weather-desc {
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: 18px;
 }
 
 /* --- Countdown Section --- */
@@ -236,90 +185,6 @@ div.small {
   text-align: center;
   
 }
-/*
-#countdown {
-  font-size: 1.8rem;
-  font-weight: 100;
-  color: var(--light);
-  margin: 10px;
-
-  text-align:start;
-}
-
-#cd-message {
-  margin-top: 8px;
-  font-size: 0.9rem;
-  color: var(--light);
-}
-*/
-/* --- Holidays Dropdown --- */
-details summary {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--light);
-  cursor: pointer;
-  list-style:table;
-}
-
-details summary::marker {
-  display: none;
-}
-
-details[open] summary {
-  color: var(--light);
-}
-
-details {
-  border: 1px solid #e0e0e0;
-  border-radius: var(--radius);
-  padding: 10px 15px;
-  background: #fefefe;
-  transition: var(--transition);
-}
-
-details:hover {
-  background: #f8faff;
-}
-
-.div.holiday{
-  margin-bottom: 15px;
-  font-size:larger;
-}
-
-/*
-.holidays-list {
-  margin-top: 12px;
-  padding-left: 10px;
-  
-}
-
-
-.holidays-list .holiday {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.holidays-list .holiday:last-child {
-  border-bottom: none;
-}
-
-.holidays-list .holiday .when {
-  font-size: 0.9rem;
-  color: var(--light);
-}
-
-.holidays-list .badge {
-  background: var(--accent);
-  color: white;
-  font-size: 0.8rem;
-  padding: 2px 8px;
-  border-radius: 20px;
-}
-*/
-
-
 
 table {
   border-collapse: collapse;
@@ -342,9 +207,11 @@ td {
 }
 
 /* --- Footer --- */
-/*footer{
-    grid-column:1/-1;
+footer{
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
     color:var(--black);
-    font-size:13px;
     margin-top:6px
-}*/
+}
