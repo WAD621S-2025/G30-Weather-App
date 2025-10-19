@@ -13,8 +13,8 @@
         <h1>Local Weather & Holiday Dashboard</h1>
         <p id="tz">Detecting timezone…</p>
         <form class="cityForm">
-        <input type="text" class="cityInput" placeholder="Enter city">
-        <button type="submit">Get Weather</button>
+        <!--<input type="text" class="cityInput" placeholder="Enter city">
+        <button type="submit">Get Weather</button>-->
         </form>
       </div>
       <div >
@@ -32,17 +32,12 @@
               <div class="time-large" id="local-time">--:--:--</div>
               <div class="time-small" id="local-date">Loading date…</div>
             </div>
-            <!--<div style="text-align:right;color:var(--muted)">
-              
-              <div id="locale" style="font-size:13px;margin-top:6px"></div>
-            </div>-->
+            
           </div>
         </section>
 
       <section class="card weather-card">
-      <!--<div style="display:flex;justify-content:space-between;align-items:center">-->
-        
-          <div class="heading">Current Weather</div>
+         <div class="heading">Current Weather</div>
           <div>
             <div class="weather-icon" id="weather-icon">☀️</div>
             <div class="weather-info">
@@ -56,8 +51,7 @@
           <div id="loc-name" class="space">Detecting…</div>
           <div >City Name</div>
           <div id="city-name" >Getting city name</div>
-        </div>
-      <!--</div>-->
+        </div>      
     </section>
 
     <section class="card countdown-card">
@@ -66,18 +60,6 @@
         <div class="small">
           Time remaining until the start of the weekend (Saturday 00:00 local time)
         </div>
-
-        <!--
-        <div class="countdown" style="margin-top:12px">
-          <div class="digits">
-            <div class="digit"><div id="cd-days">--</div><small>Days</small></div>
-            <div class="digit"><div id="cd-hours">--</div><small>Hours</small></div>
-            <div class="digit"><div id="cd-mins">--</div><small>Minutes</small></div>
-            <div class="digit"><div id="cd-secs">--</div><small>Seconds</small></div>
-          </div>
-          <div id="cd-message" style="color:var(--muted);font-size:13px"></div>
-        </div>
-        -->
 
         <table id="countdownTable">
     <thead>
@@ -102,23 +84,18 @@
     </section>
     </div>
 
-    <div class="container">
+    <div class="container-table">
     <section class="card holidays">
       
-      <!--<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">-->
-        <div class="heading">Namibian Public Holidays</div>
-        
-        <!--<div style="color:var(--muted);font-size:13px">
-        </div>-->
+      <div class="heading">Namibian Public Holidays</div>
       
-      <!--<div class="holidays-list" id="holidays-list"></div>-->
-
   
     <table id="holidayTable">
       <thead>
         <tr>
           <th>Date</th>
           <th>Name</th>
+          <th>Days Remaing</th>
         </tr>
       </thead>
       <tbody>
@@ -130,31 +107,10 @@
       </section>
 
       <footer>
-        <!-- Built with Open-Meteo API (no API key required) and browser geolocation. -->
+        Built with Open-Meteo API (no API key required) and browser geolocation.
       </footer>
     </div>
     
-  
-  <!-- Embedded holidays JSON -->
-   <!--
-  <script id="nam-holidays" type="application/json">
-  [
-    {"date":"2026-01-01","name":"New Year's Day"},
-    {"date":"2025-03-21","name":"Independence Day"},
-    {"date":"2025-04-18","name":"Good Friday"},
-    {"date":"2025-04-21","name":"Easter Monday"},
-    {"date":"2025-05-01","name":"Workers' Day"},
-    {"date":"2025-08-26","name":"Heroes' Day"},
-    {"date":"2025-09-10","name":"Cassinga Day"},
-    {"date":"2025-12-10","name":"Human Rights Day"},
-    {"date":"2025-12-25","name":"Christmas Day"},
-    {"date":"2025-12-26","name":"Family Day"}
-  ]
-  </script>
--->
- 
-
-
   <script src="script.js"></script>
 </body>
 </html>
