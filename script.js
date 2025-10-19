@@ -4,6 +4,8 @@ const WEATHER_ENDPOINT = (lat, lon) =>
   //`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=auto`;
 `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=weather_code,temperature_2m,wind_speed_10m&timezone=Europe%2FBerlin&forecast_days=1`;
 
+const CITY_ENDPOINT = (lat, lon) =>
+`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`;
 
 const PLACE_ENDPOINT = (place_name) =>
   `https://geocoding-api.open-meteo.com/v1/search?name=${place_name}&count=10&language=en&format=json`;
@@ -45,7 +47,7 @@ async function getLonLat(city){
     const response = await fetch(apiUrl);
 
     if(!response.ok){
-        throw new Error("Could not fetch city data");
+        throw new Error("Could not fetch city info");
     }
 
     return await response.json();
@@ -97,7 +99,7 @@ async function fetchWeather(lat, lon) {
     const cw = data.current;
     $('temperature').textContent = `${cw.temperature_2m.toFixed(1)} °C`;
     $('weather-desc').textContent =
-      `Wind ${cw.wind_speed_10m} m/s • ${toWeatherText(cw.weather_code)} • Updated ${new Date(cw.time).toLocaleTimeString()}`;
+      `Wind ${cw.wind_speed_10m} km/h • ${toWeatherText(cw.weather_code)} • Updated ${new Date(cw.time).toLocaleTimeString()}`;
     $('weather-icon').textContent = weatherEmoji(cw.weather_code);
     $('loc-name').textContent = `${lat.toFixed(2)}, ${lon.toFixed(2)}`;
     $('status').textContent = 'Weather updated';
@@ -107,6 +109,33 @@ async function fetchWeather(lat, lon) {
     console.error(err);
   }
 }
+
+
+async function fetchCity(lat, lon) {
+  try {
+    $('status').textContent = 'Fetching city...';
+    const resp = await fetch(CITY_ENDPOINT(lat, lon));
+    if (!resp.ok) throw new Error('CITY API error');
+    const data = await resp.json();
+    console.log(data);
+    console.log(data.localityInfo.administrative[1].name);
+    const cityName = data.localityInfo.administrative[1].name || "Unkown";
+    document.getElementById('city-name').textContent = cityName;
+    
+    //$('city-name').textContent = `${data.localityInfo.administrative[1]?.name}`;
+    //$('city-name').textContent = cityName;
+    } catch (err) {
+    $('status').textContent = 'City unavailable';
+    console.error(err);
+  }
+}
+
+
+
+fetch("https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=-22.5609&longitude=17.0658&localityLanguage=en")
+.then(response => response.json())
+.then(data => console.log(data.localityInfo.administrative[1].name))
+.catch(error => console.error(error));
 
 // Weather helpers
 function weatherEmoji(code) {
@@ -200,12 +229,22 @@ async function init() {
 
   if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition(
-      pos => fetchWeather(pos.coords.latitude, pos.coords.longitude),
-      () => fetchWeather(DEFAULT_COORDS.latitude, DEFAULT_COORDS.longitude),
+      pos => {
+      const { latitude, longitude } = pos.coords;
+      fetchWeather(latitude, longitude);
+      fetchCity(latitude, longitude);
+    },
+    () => {
+      // fallback to default coordinates
+      fetchWeather(DEFAULT_COORDS.latitude, DEFAULT_COORDS.longitude);
+      fetchCity(DEFAULT_COORDS.latitude, DEFAULT_COORDS.longitude);
+    },
+      
       { timeout: 10000 }
     );
   } else {
     fetchWeather(DEFAULT_COORDS.latitude, DEFAULT_COORDS.longitude);
+    fetchCity(DEFAULT_COORDS.latitude, DEFAULT_COORDS.longitude);
   }
 }
 

@@ -17,50 +17,53 @@
         <button type="submit">Get Weather</button>
         </form>
       </div>
-      <div style="text-align:right">
-        <div id="status" style="color:var(--muted);font-size:13px">Status: ready</div>
+      <div >
+        <div id="status">Status: ready</div>
       </div>
      
 
     </header>
+      <section >
+        <div class="container"> 
+          <section class="card time-card">
+          <div>
+            <div>
+              <div class="heading">Local Time</div>
+              <div class="time-large" id="local-time">--:--:--</div>
+              <div class="time-small" id="local-date">Loading date…</div>
+            </div>
+            <!--<div style="text-align:right;color:var(--muted)">
+              
+              <div id="locale" style="font-size:13px;margin-top:6px"></div>
+            </div>-->
+          </div>
+        </section>
 
-    <section class="card time-card">
-      <div>
-        <div>
-          <div class="time-small">Local Time</div>
-          <div class="time-large" id="local-time">--:--:--</div>
-          <div class="time-small" id="local-date">Loading date…</div>
-        </div>
-         <!--<div style="text-align:right;color:var(--muted)">
-          
-          <div id="locale" style="font-size:13px;margin-top:6px"></div>
-        </div>-->
-      </div>
-    </section>
-
-    <section class="card weather-card">
+      <section class="card weather-card">
       <!--<div style="display:flex;justify-content:space-between;align-items:center">-->
-        <div>
-          <div style="font-weight:700">Current Weather</div>
-          <div class="weather-row" style="margin-top:10px">
+        
+          <div class="heading">Current Weather</div>
+          <div>
             <div class="weather-icon" id="weather-icon">☀️</div>
             <div class="weather-info">
               <div class="temp" id="temperature">-- °C</div>
               <div class="meta" id="weather-desc">Fetching…</div>
             </div>
           </div>
+        
+        <div class="small">
+          <div >Location</div>
+          <div id="loc-name" class="space">Detecting…</div>
+          <div >City Name</div>
+          <div id="city-name" >Getting city name</div>
         </div>
-        <div style="text-align:right">
-          <div class="meta">Location</div>
-          <div id="loc-name" style="font-weight:600;margin-top:6px">Detecting…</div>
-        </div>
-      </div>
+      <!--</div>-->
     </section>
 
     <section class="card countdown-card">
       <div>
-        <div style="font-weight:bold">Countdown to Weekend</div>
-        <div style="color:var(--muted);font-size:13px">
+        <div class="heading">Countdown to Weekend</div>
+        <div class="small">
           Time remaining until the start of the weekend (Saturday 00:00 local time)
         </div>
 
@@ -96,11 +99,14 @@
 
       </div>
     </section>
+    </section>
+    </div>
 
+    <div class="container">
     <section class="card holidays">
-      <div>
+      
       <!--<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">-->
-        <div class="Holiday">Namibian Public Holidays</div>
+        <div class="heading">Namibian Public Holidays</div>
         
         <!--<div style="color:var(--muted);font-size:13px">
         </div>-->
@@ -120,14 +126,14 @@
       </tbody>
     </table>
     </div>
-    
+    </div>
       </section>
 
       <footer>
         <!-- Built with Open-Meteo API (no API key required) and browser geolocation. -->
       </footer>
     </div>
-
+    
   
   <!-- Embedded holidays JSON -->
    <!--
