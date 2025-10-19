@@ -1,15 +1,14 @@
  // --- CONFIG ---
 const DEFAULT_COORDS = { latitude: -22.5609, longitude: 17.0658 }; // Windhoek
 const WEATHER_ENDPOINT = (lat, lon) =>
-  //`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=auto`;
 `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=weather_code,temperature_2m,wind_speed_10m&timezone=Europe%2FBerlin&forecast_days=1`;
 
 const CITY_ENDPOINT = (lat, lon) =>
 `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`;
 
-const PLACE_ENDPOINT = (place_name) =>
+/*const PLACE_ENDPOINT = (place_name) =>
   `https://geocoding-api.open-meteo.com/v1/search?name=${place_name}&count=10&language=en&format=json`;
-
+*/
 function $(id) {
   return document.getElementById(id);
 }
@@ -60,7 +59,7 @@ function updateLocalTime() {
   $('local-date').textContent = now.toLocaleDateString(undefined, {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
-  //$('locale').textContent = navigator.language || 'unknown';
+  
 }
 
 // Countdown to Saturday 00:00
@@ -162,42 +161,7 @@ function toWeatherText(code) {
   return map[code] || 'Unknown';
 }
 
-/*
-// Load and render holidays
-function loadHolidaysFromEmbedded() {
-  const json = JSON.parse(document.getElementById('nam-holidays').textContent);
-  return json.map(h => ({ ...h, dateObj: new Date(h.date + 'T00:00:00') }))
-             .sort((a, b) => a.dateObj - b.dateObj);
-}
-
-function renderHolidays(list) {
-  const container = $('holidays-list');
-  container.innerHTML = '';
-  const today = new Date();
-
-  list.forEach(h => {
-    const row = document.createElement('div');
-    row.className = 'holiday';
-
-    const left = document.createElement('div');
-    left.innerHTML = `<div style="font-weight:600">${h.name}</div>
-                      <div class="when">${h.dateObj.toLocaleDateString(undefined, {
-                        weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'
-                      })}</div>`;
-
-    const right = document.createElement('div');
-    const diff = Math.ceil((h.dateObj - today) / (1000 * 60 * 60 * 24));
-    right.innerHTML = `<div class="badge">${
-      diff === 0 ? 'Today' : diff > 0 ? `In ${diff}d` : 'Passed'
-    }</div>`;
-
-    row.append(left, right);
-    container.appendChild(row);
-  });
-}
-  */
-
-//readin the .json file
+//reading the .json file and calculating the remaing day to the next public holiday
 fetch('Publlic_Holidays_Namibia.json')
   .then(response => {
     if (!response.ok) {
@@ -207,12 +171,20 @@ fetch('Publlic_Holidays_Namibia.json')
   })
   .then(data => {
     const tableBody = document.querySelector('#holidayTable tbody');
-
+    const today = new Date();
     data.forEach(holiday => {
+      const holidayDate = new Date(holiday.date);
+      const diffTime = holidayDate - today;
+
+      const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24)); //all time must be converted from miliseconds to days
+
+      const remaining = diffDays > 0 ? diffDays : 0;
+
       const row = document.createElement('tr');
       row.innerHTML = `
         <td>${holiday.date}</td>
-        <td>${holiday.name}</td>        
+        <td>${holiday.name}</td>
+        <td>${remaining}</td>        
       `;
       tableBody.appendChild(row);
     });
@@ -225,7 +197,7 @@ async function init() {
   $('tz').textContent = `Timezone: ${Intl.DateTimeFormat().resolvedOptions().timeZone}`;
   updateLocalTime(); setInterval(updateLocalTime, 1000);
   updateCountdown(); setInterval(updateCountdown, 1000);
-  //renderHolidays(loadHolidaysFromEmbedded());
+  
 
   if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition(
