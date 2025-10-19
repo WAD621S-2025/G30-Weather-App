@@ -13,7 +13,7 @@ function $(id) {
   return document.getElementById(id);
 }
 
-
+/*
 const cityForm = document.querySelector(".cityForm");
 const cityInput = document.querySelector(".cityInput");
 
@@ -51,7 +51,7 @@ async function getLonLat(city){
 
     return await response.json();
 }
-
+*/
 // Update local time & date
 function updateLocalTime() {
   const now = new Date();
