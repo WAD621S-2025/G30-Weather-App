@@ -88,6 +88,7 @@ header p{
   transition: var(--transition);
   display: flex;
   flex-direction: column;
+  align-items: center;
   
 }
 
@@ -109,8 +110,10 @@ header p{
     min-width: 320px;
     min-height: 120px;
     margin: 10px;
-    
+    align-items: center;
+    text-align: center;
     float: left;
+    
     gap: 20px;
 }
 .countdown-card{
@@ -127,6 +130,7 @@ header p{
     width: 80%;
     float: left;
     gap: 20px;
+    align-items:stretch;
     text-align: center;
     font-weight: bold;
     color: var(--muted);
@@ -180,11 +184,12 @@ header p{
 }
 
 /* --- Weather Section --- */
+/*
 .weather-card {
   display: flex;
   flex-direction: column;
   align-items:center;
-}
+}*/
 
 #temperature {
   font-size: 2rem;
@@ -244,6 +249,11 @@ details {
 
 details:hover {
   background: #f8faff;
+}
+
+.div.holiday{
+  margin-bottom: 15px;
+  font-size:larger;
 }
 
 /*

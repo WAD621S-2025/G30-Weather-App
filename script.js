@@ -1,10 +1,54 @@
  // --- CONFIG ---
 const DEFAULT_COORDS = { latitude: -22.5609, longitude: 17.0658 }; // Windhoek
 const WEATHER_ENDPOINT = (lat, lon) =>
-  `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=auto`;
+  //`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=auto`;
+`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=weather_code,temperature_2m,wind_speed_10m&timezone=Europe%2FBerlin&forecast_days=1`;
+
+
+const PLACE_ENDPOINT = (place_name) =>
+  `https://geocoding-api.open-meteo.com/v1/search?name=${place_name}&count=10&language=en&format=json`;
 
 function $(id) {
   return document.getElementById(id);
+}
+
+
+const cityForm = document.querySelector(".cityForm");
+const cityInput = document.querySelector(".cityInput");
+
+cityForm.addEventListener("submit", async event => {
+
+    event.preventDefault();
+
+    const city = cityInput.value;
+
+    if(city){
+        try{
+            const cityLonLat = await getLonLat(city);
+            displayCityInfo(cityLonLat);
+            console.log(cityLonLat);
+        }
+        catch(error){
+            console.error(error);
+            displayError(error);
+        }
+    }
+    else{
+        displayError("Please enter a city");
+    }
+});
+
+async function getLonLat(city){
+
+    const apiUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=10&language=en&format=json`;
+
+    const response = await fetch(apiUrl);
+
+    if(!response.ok){
+        throw new Error("Could not fetch city data");
+    }
+
+    return await response.json();
 }
 
 // Update local time & date
@@ -41,6 +85,7 @@ function updateCountdown() {
   $('cd-secs').textContent = s % 60;
 }
 
+
 // Weather API fetch
 async function fetchWeather(lat, lon) {
   try {
@@ -48,11 +93,12 @@ async function fetchWeather(lat, lon) {
     const resp = await fetch(WEATHER_ENDPOINT(lat, lon));
     if (!resp.ok) throw new Error('Weather API error');
     const data = await resp.json();
-    const cw = data.current_weather;
-    $('temperature').textContent = `${cw.temperature.toFixed(1)} °C`;
+    console.log(data);
+    const cw = data.current;
+    $('temperature').textContent = `${cw.temperature_2m.toFixed(1)} °C`;
     $('weather-desc').textContent =
-      `Wind ${cw.windspeed} m/s • ${toWeatherText(cw.weathercode)} • Updated ${new Date(cw.time).toLocaleTimeString()}`;
-    $('weather-icon').textContent = weatherEmoji(cw.weathercode);
+      `Wind ${cw.wind_speed_10m} m/s • ${toWeatherText(cw.weather_code)} • Updated ${new Date(cw.time).toLocaleTimeString()}`;
+    $('weather-icon').textContent = weatherEmoji(cw.weather_code);
     $('loc-name').textContent = `${lat.toFixed(2)}, ${lon.toFixed(2)}`;
     $('status').textContent = 'Weather updated';
   } catch (err) {
@@ -64,7 +110,7 @@ async function fetchWeather(lat, lon) {
 
 // Weather helpers
 function weatherEmoji(code) {
-  if (code === 0) return '☀️';
+  if (code == 0) return '☀️';
   if ([1, 2].includes(code)) return '🌤️';
   if ([3].includes(code)) return '☁️';
   if (code >= 45 && code <= 48) return '🌫️';
@@ -87,6 +133,7 @@ function toWeatherText(code) {
   return map[code] || 'Unknown';
 }
 
+/*
 // Load and render holidays
 function loadHolidaysFromEmbedded() {
   const json = JSON.parse(document.getElementById('nam-holidays').textContent);
@@ -119,6 +166,7 @@ function renderHolidays(list) {
     container.appendChild(row);
   });
 }
+  */
 
 //readin the .json file
 fetch('Publlic_Holidays_Namibia.json')
@@ -148,7 +196,7 @@ async function init() {
   $('tz').textContent = `Timezone: ${Intl.DateTimeFormat().resolvedOptions().timeZone}`;
   updateLocalTime(); setInterval(updateLocalTime, 1000);
   updateCountdown(); setInterval(updateCountdown, 1000);
-  renderHolidays(loadHolidaysFromEmbedded());
+  //renderHolidays(loadHolidaysFromEmbedded());
 
   if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition(
