@@ -14,7 +14,7 @@ function updateLocalTime() {
   $('local-date').textContent = now.toLocaleDateString(undefined, {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
-  $('locale').textContent = navigator.language || 'unknown';
+  //$('locale').textContent = navigator.language || 'unknown';
 }
 
 // Countdown to Saturday 00:00

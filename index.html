@@ -7,27 +7,30 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="wrap">
+  <div>
     <header>
       <div>
         <h1>Local Weather & Holiday Dashboard</h1>
         <p id="tz">Detecting timezone…</p>
       </div>
-      <div style="text-align:right">
+      <!--<div style="text-align:right">
         <div id="status" style="color:var(--muted);font-size:13px">Status: ready</div>
-      </div>
+      </div>-->
+     
+
     </header>
 
     <section class="card time-card">
-      <div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
         <div>
+          <div class="time-small">Local Time</div>
           <div class="time-large" id="local-time">--:--:--</div>
           <div class="time-small" id="local-date">Loading date…</div>
         </div>
-        <div style="text-align:right;color:var(--muted)">
-          <div>Local Time</div>
+         <!--<div style="text-align:right;color:var(--muted)">
+          
           <div id="locale" style="font-size:13px;margin-top:6px"></div>
-        </div>
+        </div>-->
       </div>
     </section>
 
@@ -52,10 +55,12 @@
 
     <section class="card countdown-card">
       <div>
-        <div style="font-weight:700">Countdown to Weekend</div>
+        <div style="font-weight:bold">Countdown to Weekend</div>
         <div style="color:var(--muted);font-size:13px">
-          Time remaining until the start of the weekend (Saturday 00:00 local)
+          Time remaining until the start of the weekend (Saturday 00:00 local time)
         </div>
+
+        <!--
         <div class="countdown" style="margin-top:12px">
           <div class="digits">
             <div class="digit"><div id="cd-days">--</div><small>Days</small></div>
@@ -65,36 +70,59 @@
           </div>
           <div id="cd-message" style="color:var(--muted);font-size:13px"></div>
         </div>
+        -->
+
+        <table id="countdownTable">
+    <thead>
+      <tr>
+        <th>Days</th>
+        <th>Hours</th>
+        <th>Minutes</th>
+        <th>Seconds</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <td id="cd-days"> </td>
+      <td id="cd-hours"> </td>
+      <td id="cd-mins"> </td>
+      <td id="cd-secs"> </td>
+    </tbody>
+    </table>
+
       </div>
     </section>
 
     <section class="card holidays">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <div style="font-weight:700">Namibian Public Holidays</div>
-        <div style="color:var(--muted);font-size:13px">
-        </div>
-      </div>
-      <div class="holidays-list" id="holidays-list"></div>
+      <div>
+      <!--<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">-->
+        <div style="margin-bottom: 15px; font-size:larger;">Namibian Public Holidays</div>
+        
+        <!--<div style="color:var(--muted);font-size:13px">
+        </div>-->
+      
+      <!--<div class="holidays-list" id="holidays-list"></div>-->
 
   
-  <table id="holidayTable">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Data is added here by the script.js -->
-    </tbody>
-  </table>
-  
-    </section>
+    <table id="holidayTable">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data is added here by the script.js -->
+      </tbody>
+    </table>
+    </div>
+    
+      </section>
 
-    <footer>
-      Built with Open-Meteo API (no API key required) and browser geolocation.
-    </footer>
-  </div>
+      <footer>
+        <!-- Built with Open-Meteo API (no API key required) and browser geolocation. -->
+      </footer>
+    </div>
 
   
   <!-- Embedded holidays JSON -->

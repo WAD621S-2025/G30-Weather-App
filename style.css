@@ -10,7 +10,7 @@
   --bg:#0f1724; 
   --gap:16px; 
   --radius: 10px;
-  --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   --transition: all 0.3s ease;
 }
 
@@ -21,10 +21,19 @@ body {
   background: url('Sunset.webp') no-repeat center center fixed;
   background-size: cover;
   color: var(--muted);
+  
 }
 
 .wrap{
-    max-width:1100px;
+  display: grid;
+  padding: 20px;
+  gap: 20px;
+  min-width: 320px;
+}
+/*
+.wraps{
+    max-width:700px;
+    min-width: 320px;
     margin:36px auto;
     padding:24px;
     display:grid;
@@ -33,17 +42,34 @@ body {
    
 
 }
+*/
+/*
+.wrap{
+    max-width:1100px;
+    min-width: 320px;
+    margin:36px auto;
+    padding:24px;
+    display:flex;
+    flex-direction: column;
+    grid-template-columns:repeat(12,1fr);
+    gap:var(--gap);
+   
+
+}*/
 
 /* --- Header --- */
 header{
-    grid-column:1/-1;
+    /*grid-column:1/-1;*/
     display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px
+    /*align-items:center;
+    justify-content:space-between;*/
+    gap:20px;
+    margin: 20px;
+    text-align: center;
+    display: inline;
 }
 header h1{
-    font-size:20px;
+    font-size:30px;
     margin:0
 }
 header p{
@@ -58,20 +84,67 @@ header p{
   box-shadow: var(--shadow);
   padding: 20px;
   margin-bottom: 20px;
+  margin-top: 20px;
   transition: var(--transition);
+  display: flex;
+  flex-direction: column;
   
 }
 
 .card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
 }
 
+.time-card{
+
+    min-width: 320px;
+    min-height: 120px;
+    margin: 10px;
+    
+    float: left;
+    gap: 20px;
+}
+.weather-card{
+    min-width: 320px;
+    min-height: 120px;
+    margin: 10px;
+    
+    float: left;
+    gap: 20px;
+}
+.countdown-card{
+    min-width: 320px;
+    min-height: 120px;
+    
+    float: left;
+    gap: 20px;
+  
+    margin: 10px;
+}
+.holidays{
+    min-width: 320px;
+    width: 80%;
+    float: left;
+    gap: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: var(--muted);
+    margin: 10px;
+    
+}
+
+.holidays-layout{
+  font-weight: bold;
+}
+
+/*
 .card h2 {
   margin-top: 0;
   color: var(--light);
   font-size: 1.2rem;
 }
+
 .time-card{
     grid-column:1/5
 }
@@ -84,24 +157,33 @@ header p{
 .holidays{
     grid-column:1/-1
 }
+*/
+
 /* --- Time Section --- */
 .time-large {
-  font-size: 2.2rem;
-  font-weight: 700;
+  font-size: 30px;
+  font-weight: bold;
   color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  align-items:center;
  
 }
 
 .time-small {
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  margin: 10px;
 }
 
 /* --- Weather Section --- */
 .weather-card {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items:center;
 }
 
 #temperature {
@@ -118,11 +200,12 @@ header p{
 /* --- Countdown Section --- */
 .countdown-card {
   text-align: center;
+  
 }
 
 #countdown {
   font-size: 1.8rem;
-  font-weight: 600;
+  font-weight: 100;
   color: var(--light);
   margin-top: 10px;
   text-align:start;
@@ -163,10 +246,13 @@ details:hover {
   background: #f8faff;
 }
 
+/*
 .holidays-list {
   margin-top: 12px;
   padding-left: 10px;
+  
 }
+
 
 .holidays-list .holiday {
   display: flex;
@@ -191,11 +277,25 @@ details:hover {
   padding: 2px 8px;
   border-radius: 20px;
 }
+*/
+
+
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid var(--muted);
+  padding: 8px;
+  text-align: center;
+}
 
 /* --- Footer --- */
-footer{
+/*footer{
     grid-column:1/-1;
     color:var(--black);
     font-size:13px;
     margin-top:6px
-}
+}*/
